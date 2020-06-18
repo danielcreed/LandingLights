@@ -1,0 +1,49 @@
+//# Drone-LZ //Lighting for drone landing zone //The approach path requires 2 X 4 flashing leds in a row plus position leds
+
+Int Light1 = A1;
+Int Light2 = A2;
+Int Light3 = A3;
+Int Light4 = A4;
+
+// constants won't change. They're used here to set pin numbers:
+const int buttonPin = D4;     // the number of the pushbutton pin
+
+
+// variables will change:
+int buttonState = 0;         // variable for reading the pushbutton status
+
+void setup() {
+  // initialize the LED pin as an output:
+pinMode(Light1, OUTPUT);
+pinMode(Light2, OUTPUT);
+pinMode(Light3, OUTPUT);
+pinMode(Light4, OUTPUT); 
+// initialize the pushbutton pin as an input:
+pinMode(buttonPin, INPUT);
+
+
+}
+
+void loop() {
+  // read the state of the pushbutton value:
+  buttonState = digitalRead(buttonPin);
+
+  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+  if (buttonState == HIGH) {
+    // turn all landing lights on:
+DigitalWrite(Light1, HIGH);
+Delay(100);
+DigitalWrite(Light2, HIGH);
+Delay(100);
+DigitalWrite(Light3, HIGH);
+Delay(100);
+DigitalWrite(Light4, HIGH);
+Delay(100);
+DigitalWrite(Light1, LOW); digitalWrite(Light2, LOW); digitalWrite(Light3, LOW); digitalWrite(Light4, LOW);
+Delay(2000);
+
+  } else {
+    // turn all landing lights off:
+    DigitalWrite(Light1, LOW); digitalWrite(Light2, LOW); digitalWrite(Light3, LOW); digitalWrite(Light4, LOW);
+  }
+}
