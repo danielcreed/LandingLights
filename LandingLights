@@ -13,17 +13,23 @@ const int buttonPin = D4;     // the number of the pushbutton pin
 int buttonState = 0;         // variable for reading the pushbutton status
 
 void setup() {
-  // initialize the LED pin as an output:
+  //Initialize the LED A1,A2,A3 and A4 pins as an output:
 pinMode(Light1, OUTPUT);
 pinMode(Light2, OUTPUT);
 pinMode(Light3, OUTPUT);
 pinMode(Light4, OUTPUT); 
-// initialize the pushbutton pin as an input:
+
+// initialize the button toggle:
 pinMode(buttonPin, INPUT);
 
-   // We are also going to declare a Particle.function so that we can turn the LED on and off from the cloud.
+// Toggle for APP
    Particle.function("LandingLights",ledToggle);
-   // This is saying that when we ask the cloud for the function "led", it will employ the function ledToggle() from this app.
+   
+// Ensure all lights are off on Start
+  digitalWrite(Light1, LOW);
+  digitalWrite(Light2, LOW);
+  digitalWrite(Light3, LOW);
+  digitalWrite(Light4, LOW);
 }
 
 void loop() {
