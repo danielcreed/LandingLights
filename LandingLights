@@ -21,7 +21,9 @@ pinMode(Light4, OUTPUT);
 // initialize the pushbutton pin as an input:
 pinMode(buttonPin, INPUT);
 
-
+   // We are also going to declare a Particle.function so that we can turn the LED on and off from the cloud.
+   Particle.function("LandingLights",ledToggle);
+   // This is saying that when we ask the cloud for the function "led", it will employ the function ledToggle() from this app.
 }
 
 void loop() {
@@ -47,3 +49,22 @@ Delay(2000);
     DigitalWrite(Light1, LOW); digitalWrite(Light2, LOW); digitalWrite(Light3, LOW); digitalWrite(Light4, LOW);
   }
 }
+
+  int ledToggle(String command) {
+//Turn on and off from phone/App
+    if (command=="on") {
+        digitalWrite(led1,HIGH);
+        digitalWrite(led2,HIGH);
+        return 1;
+    }
+    else if (command=="off") {
+        digitalWrite(led1,LOW);
+        digitalWrite(led2,LOW);
+        return 0;
+    }
+    else {
+        return -1;
+    }
+  }
+
+
